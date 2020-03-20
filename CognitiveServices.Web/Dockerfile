@@ -7,9 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["CognitiveServices.Web/CognitiveServices.Web.csproj", "CognitiveServices.Web/"]
+COPY ["CognitiveServices.Web.csproj", "CognitiveServices.Web/"]
 RUN dotnet restore "CognitiveServices.Web/CognitiveServices.Web.csproj"
-COPY . .
+COPY ["." , "CognitiveServices.Web/"]
 WORKDIR "/src/CognitiveServices.Web"
 RUN dotnet build "CognitiveServices.Web.csproj" -c Release -o /app/build
 
