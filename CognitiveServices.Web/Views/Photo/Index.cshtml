@@ -1,0 +1,41 @@
+﻿@model PhotoViewModel
+@{
+    ViewData["Title"] = "Imagem - Index";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+@if (TempData["photoError"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["photoError"]
+    </div>
+}
+<span>A imagem selecionada será submetida a API de Análise Computacional e os resultados serão exibidos logo em seguida. Certifique-se de que a imagem possua um rosto ou tenha pessoas.</span><br />
+<span>Visite a <strong><a href="https://azure.microsoft.com/pt-br/services/cognitive-services/computer-vision/" target="_blank">página oficial do Azure</a></strong> para mais informações</span>
+<form asp-action="Detect" asp-controller="Photo" enctype="multipart/form-data">
+    <div class="form-group mt-3">
+        <div class="input-group mb-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-camera"></i></span>
+                </div>
+                <div class="custom-file">
+                    <input asp-for="File" type="file" accept="image/*" capture="camera" class="custom-file-input" aria-describedby="inputText" />
+                    <label class="custom-file-label" for="inputText">Selecione uma imagem</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Visualizar Informações" class="btn btn-primary" />
+    </div>
+</form>
+
+<script>
+    let menu = document.querySelectorAll('.nav-link')[1];
+
+    if (menu) {
+        menu.classList.add('active')
+    }
+</script>
+

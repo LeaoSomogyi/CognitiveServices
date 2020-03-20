@@ -1,0 +1,32 @@
+﻿@model CognitiveServices.Web.Models.Text.AnalyzeResult
+@{
+    ViewData["Title"] = "Texto - Resultados";
+}
+<div class="row mt-5">
+    <div class="col-12">
+        <h3>Resultado da análise</h3>
+        <span>Total de idiomas encontrados: @Model.Language?.Count</span><br /><br />
+        @foreach (var item in Model?.Language?.SelectMany(l => l?.DetectedLanguages))
+        {
+            <span>Idioma: @item.Name | Percentual de certeza: @item.ScorePercentage % </span><br /><br />
+        }
+        <span>Total de sentimentos encontrados: @Model.Sentiment?.Count</span><br /><br />
+        @foreach (var item in Model?.Sentiment)
+        {
+            <span>Sentimento: @item.Sentiment | Percentual de certeza: @item.SentimentPercentage() % </span><br /><br />
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-2 col-lg-2 mt-3">
+        <a asp-action="Index" asp-controller="Text"><i class="fa fa-arrow-left"></i> Voltar</a>
+    </div>
+</div>
+
+<script>
+    let menu = document.querySelectorAll('.nav-link')[2];
+
+    if (menu) {
+        menu.classList.add('active')
+    }
+</script>

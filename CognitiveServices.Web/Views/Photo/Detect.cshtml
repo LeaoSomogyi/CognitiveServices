@@ -1,0 +1,37 @@
+﻿@model CognitiveServices.Web.Models.Vision.Analyze
+
+@{
+    ViewData["Title"] = "Imagem - Resultados";
+    Layout = "../Shared/_Layout.cshtml";
+}
+<div class="row mt-5">
+    <div class="col-12">
+        <h3>Resultado da análise</h3>
+        <span>Descrições encontradas: @Model.Description?.Captions?.Count</span><br />
+        @foreach (var item in Model.Description?.Captions)
+        {
+            <span>Texto: @item.Text | Percentual de certeza: @item.ConfidencePercentage % </span><br />
+        }
+        <span>Quantidade de faces detectadas: @Model.Faces?.Count</span><br />
+        @foreach (var item in Model.Faces)
+        {
+            <span>Gênero: @item.GenderDescription | Idade: @item.Age</span><br />
+        }
+    </div>
+    <div class="col-12 col-lg-12 mt-5">
+        <img src="data:image/png;base64,@Model.Base64Image" class="img-fluid" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-2 col-lg-2 mt-3">
+        <a asp-action="Index" asp-controller="Photo"><i class="fa fa-arrow-left"></i> Voltar</a>
+    </div>
+</div>
+
+<script>
+    let menu = document.querySelectorAll('.nav-link')[1];
+
+    if (menu) {
+        menu.classList.add('active')
+    }
+</script>
