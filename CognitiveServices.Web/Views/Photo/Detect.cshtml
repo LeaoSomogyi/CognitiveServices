@@ -1,4 +1,4 @@
-﻿@model CognitiveServices.Web.Models.Vision.Analyze
+﻿@model Analyze
 
 @{
     ViewData["Title"] = "Imagem - Resultados";
@@ -8,18 +8,18 @@
     <div class="col-12">
         <h3>Resultado da análise</h3>
         <span>Descrições encontradas: @Model.Description?.Captions?.Count</span><br />
-        @foreach (var item in Model.Description?.Captions)
+        @foreach (var item in Model?.Description?.Captions)
         {
-            <span>Texto: @item.Text | Percentual de certeza: @item.ConfidencePercentage % </span><br />
+            <span>Texto: @item?.Text | Percentual de certeza: @item?.ConfidencePercentage % </span><br />
         }
-        <span>Quantidade de faces detectadas: @Model.Faces?.Count</span><br />
-        @foreach (var item in Model.Faces)
+        <span>Quantidade de faces detectadas: @Model?.Faces?.Count</span><br />
+        @foreach (var item in Model?.Faces)
         {
-            <span>Gênero: @item.GenderDescription | Idade: @item.Age</span><br />
+            <span>Gênero: @item?.GenderDescription | Idade: @item?.Age</span><br />
         }
     </div>
     <div class="col-12 col-lg-12 mt-5">
-        <img src="data:image/png;base64,@Model.Base64Image" class="img-fluid" />
+        <img src="data:image/png;base64,@Model?.Base64Image" class="img-fluid" />
     </div>
 </div>
 <div class="row">

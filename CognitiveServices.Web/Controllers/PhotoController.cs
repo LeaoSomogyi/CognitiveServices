@@ -21,6 +21,7 @@ namespace CognitiveServices.Web.Controllers
 
         [HttpPost]
         [DisableRequestSizeLimit]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Detect(PhotoViewModel model)
         {
             if (model?.File == null)
@@ -31,6 +32,13 @@ namespace CognitiveServices.Web.Controllers
             }
             else
             {
+                if (model.File.Length > 4e+6)
+                {
+                    TempData["photoError"] = "O tamanho máximo permitido da imagem é 4MB!";
+
+                    return View(nameof(Index));
+                }
+
                 var restrictImage = await _cognitiveService.IsRestrictImageAsync(model);
 
                 if (restrictImage)

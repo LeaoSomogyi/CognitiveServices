@@ -1,6 +1,7 @@
-﻿@model CognitiveServices.Web.Models.Text.AnalyzeResult
+﻿@model AnalyzeResult
 @{
     ViewData["Title"] = "Texto - Resultados";
+    Layout = "../Shared/_Layout.cshtml";
 }
 <div class="row mt-5">
     <div class="col-12">
@@ -8,12 +9,12 @@
         <span>Total de idiomas encontrados: @Model.Language?.Count</span><br /><br />
         @foreach (var item in Model?.Language?.SelectMany(l => l?.DetectedLanguages))
         {
-            <span>Idioma: @item.Name | Percentual de certeza: @item.ScorePercentage % </span><br /><br />
+        <span>Idioma: @item.Name | Percentual de certeza: @item.ScorePercentage % </span><br /><br />
         }
         <span>Total de sentimentos encontrados: @Model.Sentiment?.Count</span><br /><br />
         @foreach (var item in Model?.Sentiment)
         {
-            <span>Sentimento: @item.Sentiment | Percentual de certeza: @item.SentimentPercentage() % </span><br /><br />
+        <span>Sentimento: @item.Sentiment | Percentual de certeza: @item.SentimentPercentage() % </span><br /><br />
         }
     </div>
 </div>
